@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon, Layout, Menu } from 'antd'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import './style.less'
 
 const {Sider} = Layout
@@ -29,10 +29,10 @@ function renderMenu(data) {
 			)
 		}
 		return <Menu.Item title={item.title} key={item.key}>
-			<Link to={item.key}>
+			<NavLink to={item.key}>
 				<Icon type={item.icon}/>
 				<span>{item.title}</span>
-			</Link>
+			</NavLink>
 		</Menu.Item>
 	})
 }

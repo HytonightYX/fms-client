@@ -4,16 +4,11 @@ import { querySiderMenu } from '../services/api'
 import FmsHeader from '../components/Header'
 import SiderLeft from '../components/SiderLeft'
 import FmsFooter from '../components/Footer'
-
-import './style.less'
-
 import {nav_menu} from '../config/menu.config'
+import './style.less'
 
 const {Content} = Layout
 
-/**
- * 根组件, 一般在这里定义路由
- */
 class Index extends Component {
 	state = {
 		collapsed: false,

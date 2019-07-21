@@ -6,7 +6,7 @@ import Login from './pages/login'
 import Dashboard from './pages/dashboard'
 import Auth from './pages/auth'
 import SingleFile from './pages/singleFIle'
-import ProjectFile from './pages/ProjectFile'
+import ProjectFile from './pages/projectFile'
 import Error404 from './pages/error/404'
 
 function App() {
@@ -17,8 +17,8 @@ function App() {
         <Index>
           <Switch>
             <Route path="/index/" exact component={Dashboard} />
-            <Route path="/index/dashboard/" component={Dashboard} />
             <Route path="/index/auth/" component={Auth} />
+            <Route path="/index/dashboard/" component={Dashboard} />
             <Route path="/index/file/single" component={SingleFile} />
             <Route path="/index/file/project" component={ProjectFile} />
             <Route component={Error404} />
