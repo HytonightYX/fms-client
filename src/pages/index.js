@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Layout } from 'antd'
+import { querySiderMenu } from '../services/api'
 import FmsHeader from '../components/Header'
 import SiderLeft from '../components/SiderLeft'
 import FmsFooter from '../components/Footer'
-import {querySiderMenu} from '../services/api'
-import axios from 'axios'
+
 import './style.less'
+
+import {nav_menu} from '../config/menu.config'
 
 const {Content} = Layout
 
@@ -15,14 +17,13 @@ const {Content} = Layout
 class Index extends Component {
 	state = {
 		collapsed: false,
-		menu: []
+		menu: nav_menu
 	}
 
-	// global.config.mookURL +
 	componentWillMount() {
 		querySiderMenu()
 			.then(res => {
-				this.setState({menu: res})
+				this.setState({menu: nav_menu})
 			})
 			.catch(e => {
 				console.log(e)
@@ -46,7 +47,7 @@ class Index extends Component {
 					<FmsHeader collapsed={this.state.collapsed} toggle={this.toggle}/>
 
 					<Content className='content'>
-						Content
+						{this.props.children}
 					</Content>
 
 					<FmsFooter>
