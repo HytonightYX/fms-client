@@ -1,28 +1,28 @@
 const nav_menu = [
 	{
 		title: '总览',
-		key: '/dashboard',
+		key: '/index/dashboard',
 		icon: 'dashboard'
 	},
 	{
 		title: '档案管理',
-		key: '/file',
+		key: '/index/file',
 		icon: 'profile',
 
 		children: [
 			{
 				title: '文件档案',
-				key: '/file/single'
+				key: '/index/file/single'
 			},
 			{
 				title: '业务项目档案',
-				key: '/file/project'
+				key: '/index/file/project'
 			}
 		]
 	},
 	{
 		title: '权限管理',
-		key: '/auth',
+		key: '/index/auth',
 		icon: 'security-scan'
 	}
 ]
