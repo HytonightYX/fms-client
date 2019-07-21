@@ -12,8 +12,12 @@ fms的前端代码库
 - 使用 async/await 而不是原生Promise
 - 点几个新的技能树:日志,RBAC权限管理,单元测试...
 
+
+
 ## 一些问题
 - user menu 下拉框位置不对,要往下一点
+
+
 
 ## 进度
 
@@ -35,7 +39,7 @@ src/
       style.css    # 组件样式
     ...
     index.ts       # 到处所有组件
-  containers/      # 🔴 包含'容器组件'和'页面组件'
+  pagess/      # 🔴 包含'容器组件'和'页面组件'
     LoginPage/     # 页面组件, 例如登录
       components/  # 页面级别展示组件，这些组件不能复用与其他页面组件。
         Button.tsx # 组件未必是一个目录形式，对于一个简单组件可以是一个单文件形式. 但还是推荐使用目录，方便扩展
@@ -60,3 +64,8 @@ src/
   contants.ts      # 全局常量
 ```
 
+
+
+## 资料
+
+[如何做好网页后台的表单和表格设计](https://www.uisdc.com/form-and-table-design)
