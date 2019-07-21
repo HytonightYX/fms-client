@@ -3,7 +3,7 @@ import { Icon, Layout, Menu } from 'antd'
 import './style.less'
 
 const {Sider} = Layout
-const { SubMenu } = Menu;
+const {SubMenu} = Menu
 
 /**
  * 递归渲染菜单
@@ -17,7 +17,7 @@ function renderMenu(data) {
 				<SubMenu
 					title={
 						<span>
-                <Icon type={item.icon} />
+                <Icon type={item.icon}/>
                 <span>{item.title}</span>
               </span>
 					}
@@ -27,7 +27,7 @@ function renderMenu(data) {
 				</SubMenu>
 			)
 		}
-		return <Menu.Item title={item.title} key={item.key} >
+		return <Menu.Item title={item.title} key={item.key}>
 			<Icon type={item.icon}/>
 			<span>{item.title}</span>
 		</Menu.Item>
@@ -39,10 +39,6 @@ const SiderLeft = (props) => (
 		trigger={null}
 		collapsible
 		collapsed={props.collapsed}
-		style={{
-			height: '100vh',
-			left: 0,
-		}}
 		className='sider'
 	>
 		<div className="logo"/>
