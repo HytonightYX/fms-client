@@ -5,6 +5,35 @@ import './style.less'
 const {Sider} = Layout
 const { SubMenu } = Menu;
 
+/**
+ * 递归渲染菜单
+ * @param data 请求到的菜单对象
+ * @returns {*} 完整菜单
+ */
+function renderMenu(data) {
+	return data.map((item) => {
+		if (item.children) {
+			return (
+				<SubMenu
+					title={
+						<span>
+                <Icon type={item.icon} />
+                <span>{item.title}</span>
+              </span>
+					}
+					key={item.key}
+				>
+					{renderMenu(item.children)}
+				</SubMenu>
+			)
+		}
+		return <Menu.Item title={item.title} key={item.key} >
+			<Icon type={item.icon}/>
+			<span>{item.title}</span>
+		</Menu.Item>
+	})
+}
+
 const SiderLeft = (props) => (
 	<Sider
 		trigger={null}
@@ -14,36 +43,16 @@ const SiderLeft = (props) => (
 			height: '100vh',
 			left: 0,
 		}}
+		className='sider'
 	>
 		<div className="logo"/>
-		<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-			<Menu.Item key="1">
-				<Icon type="dashboard"/>
-				<span>总览</span>
-			</Menu.Item>
-			<SubMenu
-				key='2'
-				title={
-					<span>
-          <Icon type="appstore" />
-          <span>档案管理</span>
-        </span>
-				}
-			>
-				<Menu.Item key="2-1">
-					<Icon type="video-camera"/>
-					<span>文件档案管理</span>
-				</Menu.Item>
-				<Menu.Item key="2-2">
-					<Icon type="video-camera"/>
-					<span>业务项目档案管理</span>
-				</Menu.Item>
-			</SubMenu>
-			<Menu.Item key="3">
-				<Icon type="upload"/>
-				<span>权限管理</span>
-			</Menu.Item>
+
+		<Menu theme="dark" mode="inline">
+
+			{renderMenu(props.menu)}
+
 		</Menu>
+
 	</Sider>
 )
 

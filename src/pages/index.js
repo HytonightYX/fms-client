@@ -3,6 +3,8 @@ import { Layout } from 'antd'
 import FmsHeader from '../components/Header'
 import SiderLeft from '../components/SiderLeft'
 import FmsFooter from '../components/Footer'
+import {querySiderMenu} from '../services/api'
+import axios from 'axios'
 import './style.less'
 
 const {Content} = Layout
@@ -13,6 +15,18 @@ const {Content} = Layout
 class Index extends Component {
 	state = {
 		collapsed: false,
+		menu: []
+	}
+
+	// global.config.mookURL +
+	componentWillMount() {
+		querySiderMenu()
+			.then(res => {
+				this.setState({menu: res})
+			})
+			.catch(e => {
+				console.log(e)
+			})
 	}
 
 	toggle = () => {
@@ -25,7 +39,7 @@ class Index extends Component {
 		return (
 			<Layout>
 
-				<SiderLeft collapsed={this.state.collapsed}/>
+				<SiderLeft collapsed={this.state.collapsed} menu={this.state.menu}/>
 
 				<Layout>
 
