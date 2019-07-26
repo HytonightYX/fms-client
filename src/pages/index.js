@@ -31,17 +31,29 @@ class Index extends Component {
 		})
 	}
 
+	onCollapse = () => {
+		console.log('collapsed');
+		this.setState({
+			collapsed: !this.state.collapsed,
+		})
+	};
+
 	render() {
 		return (
 			<Layout>
 
-				<SiderLeft collapsed={this.state.collapsed} menu={this.state.menu}/>
+				<SiderLeft
+					collapsed={this.state.collapsed}
+					onCollapse={this.onCollapse}
+					menu={this.state.menu}
+					theme='dark'
+				/>
 
 				<Layout>
 
 					<FmsHeader collapsed={this.state.collapsed} toggle={this.toggle}/>
 
-					<Content className='content'>
+					<Content className='index-content'>
 						{this.props.children}
 					</Content>
 
