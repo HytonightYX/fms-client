@@ -12,6 +12,7 @@ import Error404 from './pages/error/404'
 function App() {
   return (
     <>
+      <Route path={'/'} exact component={Login}/>
       <Route path={'/login'} component={Login}/>
       <Route path={'/index'} render={() => (
         <Index>
