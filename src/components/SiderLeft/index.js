@@ -39,14 +39,16 @@ function renderMenu(data) {
 
 const SiderLeft = (props) => (
 	<Sider
-		trigger={null}
+		// trigger={null}
 		collapsible
 		collapsed={props.collapsed}
+		onCollapse={props.onCollapse}
 		className='sider'
+		theme={props.theme || 'dark'}
 	>
 		<div className="logo"/>
 
-		<Menu theme="dark" mode="inline">
+		<Menu theme={props.theme || 'dark'} mode="inline">
 
 			{renderMenu(props.menu)}
 

@@ -1,17 +1,20 @@
 import React from 'react'
 import { Icon, Layout, Avatar, Dropdown, Menu } from 'antd'
-// import UserMenu from './UserMenu'
 import './style.less'
 
 const {Header} = Layout
 
 const FmsHeader = (props) => (
 	<Header className='header'>
-		<Icon
-			className='trigger'
-			type={props.collapsed ? 'menu-unfold' : 'menu-fold'}
-			onClick={props.toggle}
-		/>
+		{/*<Icon*/}
+		{/*	className='trigger'*/}
+		{/*	type={props.collapsed ? 'menu-unfold' : 'menu-fold'}*/}
+		{/*	onClick={props.toggle}*/}
+		{/*/>*/}
+
+		<span className='header-title'>
+			文件档案管理
+		</span>
 
 		<span className='user'>
 			您好,Admin &nbsp;&nbsp;
