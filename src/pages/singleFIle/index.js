@@ -4,7 +4,40 @@ import { single_file_columns, single_file_data } from '../../config/table.config
 import FilterForm from '../../components/Form/FilterForm'
 
 class SingleFile extends Component {
+
+	state = {
+		selectedRowKeys: [],
+		loading: false,
+	};
+
+	start = () => {
+		this.setState({ loading: true });
+		// ajax request after empty completing
+		setTimeout(() => {
+			this.setState({
+				selectedRowKeys: [],
+				loading: false,
+			});
+		}, 1000);
+	};
+
+	onSelectChange = selectedRowKeys => {
+		console.log('selectedRowKeys changed: ', selectedRowKeys);
+		this.setState({ selectedRowKeys });
+	};
+
+
+
 	render() {
+
+		const { loading, selectedRowKeys } = this.state;
+		const rowSelection = {
+			selectedRowKeys,
+			onChange: this.onSelectChange,
+		};
+
+		const hasSelected = selectedRowKeys.length > 0;
+
 		return (
 			<div className='table-with-filter-warp'>
 				<Card className='card-filter'>
@@ -23,6 +56,7 @@ class SingleFile extends Component {
 						columns={single_file_columns}
 						dataSource={single_file_data}
 						rowKey={r => r.fondsCode}
+						rowSelection={rowSelection}
 					/>
 				</div>
 			</div>

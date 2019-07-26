@@ -4,7 +4,7 @@ const single_file_columns = [
 		dataIndex: 'title',
 		key: 'title',
 		fixed: 'left',
-		width: 200,
+		width: 230,
 		// render(arr) {
 		// 	return arr.map((item) => {
 		// 		return item.name

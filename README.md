@@ -12,7 +12,8 @@ fms的前端代码库
 - 使用 async/await 而不是原生Promise
 - 点几个新的技能树:日志,RBAC权限管理,单元测试...
 
-
+## 一些想法
+- react-refetch库
 
 ## 一些问题
 - user menu 下拉框位置不对,要往下一点
