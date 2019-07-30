@@ -3,20 +3,22 @@ import './style.less'
 import { Form, Icon, Input, Button, message } from 'antd'
 
 class LoginForm extends React.Component {
-	handleSubmit = e => {
-		e.preventDefault()
-		this.props.form.validateFields((err, values) => {
-			if (!err) {
-				console.log('获取到' , values)
-				message.success('获取到' + values.username + ' ' + values.password)
-			}
-		})
-	}
+	// handleSubmit = e => {
+	// 	e.preventDefault()
+	// 	this.props.form.validateFields((err, values) => {
+	// 		if (!err) {
+	// 			console.log('获取到' , values)
+	// 			message.success('获取到' + values.username + ' ' + values.password)
+	//
+	//
+	// 		}
+	// 	})
+	// }
 
 	render() {
 		const {getFieldDecorator} = this.props.form
 		return (
-			<Form onSubmit={this.handleSubmit} className="login-form">
+			<Form onSubmit={this.props.handleSubmit} className="login-form">
 				<Form.Item>
 					{
 						getFieldDecorator('username', {
