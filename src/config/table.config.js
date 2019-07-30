@@ -48,12 +48,6 @@ const single_file_columns = [
 		width: 80,
 	},
 	{
-		title: '件号',
-		dataIndex: 'itemNum',
-		key: 'itemNum',
-		width: 80,
-	},
-	{
 		title: '页数',
 		dataIndex: 'page',
 		key: 'page',
@@ -108,12 +102,6 @@ const single_file_columns = [
 		dataIndex: 'fileCategory',
 		key: 'fileCategory',
 		width: 100,
-	},
-	{
-		title: '备注',
-		dataIndex: 'remarks',
-		key: 'remarks',
-		width: 80,
 	},
 	{
 		title: '机构问题',

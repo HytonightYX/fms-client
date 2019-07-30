@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Button, Table, Modal, Form, Select, Input, Icon } from 'antd'
+import { Card, Button, Table, Modal, Form, Input, Icon } from 'antd'
 import { single_file_columns, single_file_data } from '../../config/table.config'
 import FilterForm from '../../components/Form/FilterForm'
 
