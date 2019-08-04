@@ -6,25 +6,24 @@ const {Header} = Layout
 
 const FmsHeader = (props) => (
 	<Header className='header'>
-		{/*<Icon*/}
-		{/*	className='trigger'*/}
-		{/*	type={props.collapsed ? 'menu-unfold' : 'menu-fold'}*/}
-		{/*	onClick={props.toggle}*/}
-		{/*/>*/}
-
 		<span className='header-title'>
 			文件档案管理
 		</span>
 
 		<span className='user'>
-			您好,Admin &nbsp;&nbsp;
-			<Dropdown overlay={UserMenu} className='dropdown'>
+			您好,{props.currentUser
+			? () => (
+				props.currentUser.username +
+				<Dropdown overlay={UserMenu} className='dropdown'>
 				<span>
 					<Avatar shape="square" icon="user"/>
 					&nbsp;&nbsp;
 					<Icon type="caret-down" />
 				</span>
-			</Dropdown>
+				</Dropdown>
+			)
+			: '请先登录'
+		} &nbsp;&nbsp;
 		</span>
 	</Header>
 )
