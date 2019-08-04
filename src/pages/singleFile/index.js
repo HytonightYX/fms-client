@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
-import { Card, Button, Table, Modal, Form, Input, Icon } from 'antd'
+import { Card, Button, Table, Modal, Form, Input, Icon, Drawer } from 'antd'
 import { single_file_columns, single_file_data } from '../../config/table.config'
 import FilterForm from '../../components/Form/FilterForm'
+import OrganizationTreeDrawer from '../../components/Drawer'
 
 class SingleFile extends Component {
 
 	state = {
 		selectedRowKeys: [],
 		loading: false,
-		showAddFile: false
+
+		showAddFile: false,
+		showDrawer: true
 	};
 
 	start = () => {
@@ -45,6 +48,18 @@ class SingleFile extends Component {
 		alert('提交成功')
 	}
 
+	showOrganizationTreeDrawer = () => {
+		this.setState({
+			showDrawer: !this.state.showDrawer
+		})
+	}
+
+	handleCloseDrawer = () => {
+		this.setState({
+			showDrawer: !this.state.showDrawer
+		})
+	}
+
 	render() {
 		const { loading, selectedRowKeys } = this.state;
 		const rowSelection = {
@@ -62,6 +77,7 @@ class SingleFile extends Component {
 
 				<div className="table-warp">
 					<Card className='table-op-card'>
+						<Button type="primary" onClick={this.showOrganizationTreeDrawer}>选择组织</Button>
 						<Button type={'primary'} onClick={this.handleAddFile}>添加档案</Button>
 						<Button >修改档案</Button>
 						<Button type={'danger'}>删除档案</Button>
@@ -86,6 +102,13 @@ class SingleFile extends Component {
 				>
 					<AddSingleFileModalForm wrappedComponentRef={(data) => {this.addFileFormData = data}}/>
 				</Modal>
+
+				<OrganizationTreeDrawer
+					title='选择组织分类'
+					visible={this.state.showDrawer}
+					placement='left'
+					onClose={this.handleCloseDrawer}
+				/>
 			</div>
 		)
 	}
