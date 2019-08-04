@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Card, Table, Divider, Tag, Icon } from 'antd'
+import { Button, Card, Table, Divider, Tag, Icon, Tooltip } from 'antd'
 import {getTime} from '../../../services/utils'
 
 const columns = [
@@ -41,13 +41,21 @@ const columns = [
 		key: 'action',
 		render: () => (
 			<span>
-        <a><Icon type="edit"/>修改</a>
+				<Tooltip title="修改">
+          <a><Icon type="edit"/></a>
+        </Tooltip>
 				<Divider type="vertical"/>
-				<a href=""><Icon type="stop"/>停用</a>
-        <Divider type="vertical"/>
-        <a href=""><Icon type="delete"/>删除</a>
+				<Tooltip title="停用">
+          <a><Icon type="stop"/></a>
+        </Tooltip>
 				<Divider type="vertical"/>
-        <a href=""><Icon type="user" />设置用户</a>
+				<Tooltip title="删除">
+          <a><Icon type="delete"/></a>
+        </Tooltip>
+				<Divider type="vertical"/>
+				<Tooltip title="设置用户">
+          <a><Icon type="user" /></a>
+        </Tooltip>
       </span>
 		),
 	},
