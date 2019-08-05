@@ -4,14 +4,14 @@ import {getTime} from '../../../services/utils'
 
 const columns = [
 	{
-		title: '角色名称',
-		dataIndex: 'name',
-		key: 'name',
+		title: '用户名',
+		dataIndex: 'userName',
+		key: 'userName',
 	},
 	{
-		title: '角色编码',
-		dataIndex: 'code',
-		key: 'code',
+		title: '角色',
+		dataIndex: 'role',
+		key: 'role'
 	},
 	{
 		title: '更新时间',
@@ -44,16 +44,8 @@ const columns = [
           <a><Icon type="edit"/></a>
         </Tooltip>
 				<Divider type="vertical"/>
-				<Tooltip title="停用">
-          <a><Icon type="stop"/></a>
-        </Tooltip>
-				<Divider type="vertical"/>
 				<Tooltip title="删除">
           <a><Icon type="delete"/></a>
-        </Tooltip>
-				<Divider type="vertical"/>
-				<Tooltip title="设置用户">
-          <a><Icon type="user" /></a>
         </Tooltip>
       </span>
 		),
@@ -63,37 +55,53 @@ const columns = [
 const data = [
 	{
 		key: '1',
-		name: '超级管理员',
-		code: 'SuperAdmin',
+		userName: 'admin',
+		role: 'SuperAdmin',
 		time: getTime(true),
 		remark: '超管啥都能干',
 		valid: true
 	},
 	{
 		key: '2',
-		name: '录入员',
-		code: 'DataEntryStaff',
+		userName: '录入员01',
+		role: 'DataEntryStaff',
 		time: getTime(true),
 		remark: '录入档案信息',
 		valid: false
 	},
 	{
 		key: '3',
-		name: '普通用户',
-		code: 'user',
+		userName: '录入员02',
+		role: 'DataEntryStaff',
+		time: getTime(true),
+		remark: '录入档案信息',
+		valid: true
+	},
+	{
+		key: '4',
+		userName: '普通用户01',
+		role: 'user',
+		time: getTime(true),
+		remark: '只能看看,借资料',
+		valid: true
+	},
+	{
+		key: '5',
+		userName: '普通用户02',
+		role: 'user',
 		time: getTime(true),
 		remark: '只能看看,借资料',
 		valid: true
 	},
 ]
 
-class AuthRole extends Component {
+class AuthUser extends Component {
 
 	render() {
 		return (
 			<div className='table-with-filter-warp'>
 				<Card>
-					<Button type="primary" onClick={this.handleRole}>创建角色</Button>
+					<Button type="primary" onClick={this.handleAddUser}><Icon type={'search'}/>搜索用户</Button>
 				</Card>
 
 				<div className="table-warp">
@@ -107,4 +115,4 @@ class AuthRole extends Component {
 	}
 }
 
-export default AuthRole
+export default AuthUser
