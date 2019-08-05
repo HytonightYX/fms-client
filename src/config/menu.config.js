@@ -23,7 +23,18 @@ const nav_menu = [
 	{
 		title: '权限管理',
 		key: '/index/auth',
-		icon: 'security-scan'
+		icon: 'security-scan',
+
+		children: [
+			{
+				title: '角色管理',
+				key: '/index/auth/role'
+			},
+			{
+				title: '用户管理',
+				key: '/index/auth/user'
+			}
+		]
 	}
 ]
 
