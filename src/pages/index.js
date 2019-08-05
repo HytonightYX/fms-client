@@ -6,9 +6,12 @@ import SiderLeft from '../components/SiderLeft'
 import FmsFooter from '../components/Footer'
 import {nav_menu} from '../config/menu.config'
 import './style.less'
+import { inject, observer } from 'mobx-react'
 
 const {Content} = Layout
 
+@inject('userStore')
+@observer
 class Index extends Component {
 	state = {
 		collapsed: false,
@@ -51,7 +54,9 @@ class Index extends Component {
 
 				<Layout>
 
-					<FmsHeader collapsed={this.state.collapsed} toggle={this.toggle}/>
+					<FmsHeader
+						currentUser={this.props.userStore.currentUser}
+					/>
 
 					<Content className='index-content'>
 						{this.props.children}
