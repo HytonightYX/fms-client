@@ -1,24 +1,29 @@
 import React from 'react'
 import './style.less'
 import { Form, Icon, Input, Button, message } from 'antd'
+import { inject, observer } from 'mobx-react'
 
+@inject('userStore')
+@observer
 class LoginForm extends React.Component {
-	// handleSubmit = e => {
-	// 	e.preventDefault()
-	// 	this.props.form.validateFields((err, values) => {
-	// 		if (!err) {
-	// 			console.log('获取到' , values)
-	// 			message.success('获取到' + values.username + ' ' + values.password)
-	//
-	//
-	// 		}
-	// 	})
-	// }
+	handleSubmit = e => {
+		e.preventDefault()
+		this.props.form.validateFields((err, values) => {
+			if (!err) {
+				message.success('获取到' + values.username + ' ' + values.password)
+				const user = {
+					username: values.username,
+					password: values.password
+				}
+				this.props.userStore.login(user)
+			}
+		})
+	}
 
 	render() {
 		const {getFieldDecorator} = this.props.form
 		return (
-			<Form onSubmit={this.props.handleSubmit} className="login-form">
+			<Form onSubmit={this.handleSubmit} className="login-form">
 				<Form.Item>
 					{
 						getFieldDecorator('username', {

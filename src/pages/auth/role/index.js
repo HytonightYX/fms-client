@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Button, Card, Table, Divider, Tag, Icon, Tooltip } from 'antd'
-import {getTime} from '../../../services/utils'
+import { Button, Card, Table, Divider, Tag, Icon, Tooltip, Modal, Tree, Select, Form, Input, message } from 'antd'
+import { getTime } from '../../../services/utils'
+import RoleEditForm from '../../../components/Form/RoleEditForm'
 
 const columns = [
 	{
@@ -53,13 +54,12 @@ const columns = [
         </Tooltip>
 				<Divider type="vertical"/>
 				<Tooltip title="设置用户">
-          <a><Icon type="user" /></a>
+          <a><Icon type="user"/></a>
         </Tooltip>
       </span>
 		),
 	},
 ]
-
 const data = [
 	{
 		key: '1',
@@ -89,11 +89,38 @@ const data = [
 
 class AuthRole extends Component {
 
+	state = {
+		isAddRoleVisible: false,
+		checkedPermList: {}
+	}
+
+	handleAddRole = () => {
+		this.setState({
+			isAddRoleVisible: true
+		})
+	}
+
+	// 提交更改
+	handleAddRoleSubmit = () => {
+		const formValue = this.roleEditForm.props.form.getFieldsValue()
+
+		const data = {
+			name: formValue.name,
+			status: formValue.status,
+			perm: this.state.checkedPermList
+		}
+
+		message.success(`${formValue.name} 创建成功`)
+		this.setState({
+			isAddRoleVisible: false
+		})
+	}
+
 	render() {
 		return (
 			<div className='table-with-filter-warp'>
 				<Card>
-					<Button type="primary" onClick={this.handleRole}>创建角色</Button>
+					<Button type="primary" onClick={this.handleAddRole}>创建角色</Button>
 				</Card>
 
 				<div className="table-warp">
@@ -102,6 +129,27 @@ class AuthRole extends Component {
 						dataSource={data}
 					/>
 				</div>
+
+				<Modal
+					title='创建角色'
+					visible={this.state.isAddRoleVisible}
+					width={600}
+					onOk={this.handleAddRoleSubmit}
+					onCancel={() => {
+						this.setState({
+							isAddRoleVisible: false
+						})
+					}}>
+					<RoleEditForm
+						wrappedComponentRef={(form) => this.roleEditForm = form}
+						checkedPermList={this.state.checkedPermList}
+						pushCheckedPerms={(checkedPerm) => {
+							this.setState({
+								checkedPermList: checkedPerm
+							})
+						}}
+					/>
+				</Modal>
 			</div>
 		)
 	}

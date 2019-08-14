@@ -1,7 +1,12 @@
-const nav_menu = [
+const system_menu = [
 	{
 		title: '总览',
 		key: '/index/dashboard',
+		icon: 'dashboard'
+	},
+	{
+		title: '档案借阅',
+		key: '/index/borrow',
 		icon: 'dashboard'
 	},
 	{
@@ -12,11 +17,13 @@ const nav_menu = [
 		children: [
 			{
 				title: '文件档案',
-				key: '/index/file/single'
+				key: '/index/file/single',
+				icon: 'file'
 			},
 			{
 				title: '业务项目档案',
-				key: '/index/file/project'
+				key: '/index/file/project',
+				icon: 'project'
 			}
 		]
 	},
@@ -28,11 +35,13 @@ const nav_menu = [
 		children: [
 			{
 				title: '角色管理',
-				key: '/index/auth/role'
+				key: '/index/auth/role',
+				icon: 'robot'
 			},
 			{
 				title: '用户管理',
-				key: '/index/auth/user'
+				key: '/index/auth/user',
+				icon: 'team'
 			}
 		]
 	}
@@ -50,6 +59,6 @@ const user_menu = [
 ]
 
 export {
-	nav_menu,
+	system_menu,
 	user_menu
 }

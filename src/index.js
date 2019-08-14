@@ -1,22 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
+import { Provider } from 'mobx-react';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {loadConfigAsGlobal} from './services/utils'
 import config from './config'
+import stores from './stores'
 
 ReactDOM.render(
-	<HashRouter>
-		<App />
-	</HashRouter>
+	<Provider {...stores}>
+		<HashRouter>
+			<App />
+		</HashRouter>
+	</Provider>
 	, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
 // 挂载全局配置到global变量
 loadConfigAsGlobal(config)
+
+if (global.config.env === 'dev') {
+	window.__MOBX_STORE__ = stores;
+}

@@ -4,7 +4,7 @@ import { querySiderMenu } from '../services/api'
 import FmsHeader from '../components/Header'
 import SiderLeft from '../components/SiderLeft'
 import FmsFooter from '../components/Footer'
-import {nav_menu} from '../config/menu.config'
+import {system_menu} from '../config/menu.config'
 import './style.less'
 import { inject, observer } from 'mobx-react'
 
@@ -15,13 +15,13 @@ const {Content} = Layout
 class Index extends Component {
 	state = {
 		collapsed: false,
-		menu: nav_menu
+		menu: system_menu
 	}
 
 	componentWillMount() {
 		querySiderMenu()
 			.then(res => {
-				this.setState({menu: nav_menu})
+				this.setState({menu: system_menu})
 			})
 			.catch(e => {
 				console.log(e)
