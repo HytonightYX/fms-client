@@ -15,14 +15,9 @@ class UserStore {
 	updatingUserErrors
 
 	@action
-	pullUser() {
+	login(user) {
 		this.loadingUser = true;
-		this.currentUser = {
-			username: 'admin'
-		}
-		// return agent.Auth.current()
-		// 	.then(action(({ user }) => { this.currentUser = user; }))
-		// 	.finally(action(() => { this.loadingUser = false; }))
+		this.currentUser = user
 	}
 
 	@action
@@ -34,7 +29,7 @@ class UserStore {
 	}
 
 	@action
-	forgetUser() {
+	logout() {
 		this.currentUser = undefined;
 	}
 }

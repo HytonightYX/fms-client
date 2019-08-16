@@ -1,19 +1,15 @@
 import { observable, action } from 'mobx';
 
+import {querySiderMenu} from '../services/api'
+
 class UiStore {
 
 	@observable
-	siderMenu
+	siderMenu = undefined
 
 	@action
-	pullUser() {
-		this.loadingUser = true;
-		this.currentUser = {
-			username: 'admin'
-		}
-		// return agent.Auth.current()
-		// 	.then(action(({ user }) => { this.currentUser = user; }))
-		// 	.finally(action(() => { this.loadingUser = false; }))
+	async loadSiderMenu() {
+		this.siderMenu = await querySiderMenu();
 	}
 }
 
