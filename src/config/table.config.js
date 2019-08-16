@@ -1,3 +1,6 @@
+import { Button, Icon, Popover } from 'antd'
+import React from 'react'
+
 const single_file_columns = [
 	{
 		title: '文件题名',
@@ -137,14 +140,32 @@ const single_file_columns = [
 		title: '文件日期',
 		dataIndex: 'fileDate',
 		key: 'fileDate',
-		width: 150,
+		width: 120,
 	},
 	{
-		title: '',
+		title: '操作',
 		key: 'operation',
 		fixed: 'right',
-		width: 30,
-		render: () => '•••',
+		width: 50,
+		render: () => (
+			<div className='single-file-popover'>
+				<Popover
+					placement="left"
+					trigger="hover"
+					content={
+						<div className='single-file-popover-btns'>
+							<Button type="primary" size='small'>修改</Button>
+							<Button type="primary" size='small'>附件</Button>
+						</div>
+					}
+				>
+					<Icon
+						type="plus-circle"
+						theme="filled"
+					/>
+				</Popover>
+			</div>
+		),
 	},
 ]
 
