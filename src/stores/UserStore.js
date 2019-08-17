@@ -1,4 +1,6 @@
 import { observable, action } from 'mobx';
+import { queryAllUsers } from '../services/api'
+import axios from 'axios'
 
 class UserStore {
 
@@ -13,6 +15,9 @@ class UserStore {
 
 	@observable
 	updatingUserErrors
+
+	@observable
+	allUsers = undefined
 
 	@action
 	login(user) {
@@ -31,6 +36,12 @@ class UserStore {
 	@action
 	logout() {
 		this.currentUser = undefined;
+	}
+
+	@action
+	async loadAllUsers() {
+		this.allUsers = await queryAllUsers();
+		console.log('get all users')
 	}
 }
 
