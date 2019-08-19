@@ -1,3 +1,5 @@
+import { message } from 'antd'
+
 /**
  * 将配置挂载到全局变量上
  * @param config
@@ -33,3 +35,21 @@ export function getTime(onlyDate = false, isNow = true) {
 		return now.toString()
 	}
 }
+
+/**
+ * 失败时弹窗
+ * @param response api call的返回值
+ */
+export function failureMsg(response) {
+	message.error(JSON.stringify(response));
+}
+
+/**
+ * 成功时弹窗
+ * @param msg 展示信息
+ * @param duration 弹窗持续时间
+ */
+export function successMsg(msg='操作成功', duration=1) {
+	message.success(msg, duration);
+}
+
