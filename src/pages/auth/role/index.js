@@ -26,11 +26,11 @@ const columns = [
 	},
 	{
 		title: '',
-		key: 'valid',
-		dataIndex: 'valid',
-		render: valid => (
+		key: 'status',
+		dataIndex: 'status',
+		render: status => (
 			<span>
-				{valid
+				{status === 1
 					? <Tag color={'green'}>有效</Tag>
 					: <Tag color={'red'}>停用</Tag>}
       </span>
@@ -67,7 +67,7 @@ const data = [
 		code: 'SuperAdmin',
 		time: getTime(true),
 		remark: '超管啥都能干',
-		valid: true
+		status: 1
 	},
 	{
 		key: '2',
@@ -75,7 +75,7 @@ const data = [
 		code: 'DataEntryStaff',
 		time: getTime(true),
 		remark: '录入档案信息',
-		valid: false
+		status: 0
 	},
 	{
 		key: '3',
@@ -83,7 +83,7 @@ const data = [
 		code: 'user',
 		time: getTime(true),
 		remark: '只能看看,借资料',
-		valid: true
+		status: 1
 	},
 ]
 
@@ -96,14 +96,15 @@ class AuthRole extends Component {
 
 	handleAddRole = () => {
 		this.setState({
-			isAddRoleVisible: true
+			isAddRoleVisible: true,
+			checkedPermList: {}
 		})
 	}
 
 	// 提交更改
 	handleAddRoleSubmit = () => {
 		const formValue = this.roleEditForm.props.form.getFieldsValue()
-
+		this.roleEditForm.props.form.resetFields()
 		const data = {
 			name: formValue.name,
 			status: formValue.status,
@@ -127,6 +128,7 @@ class AuthRole extends Component {
 					<Table
 						columns={columns}
 						dataSource={data}
+						size={'middle'}
 					/>
 				</div>
 
@@ -148,6 +150,7 @@ class AuthRole extends Component {
 								checkedPermList: checkedPerm
 							})
 						}}
+						isEdit={false}
 					/>
 				</Modal>
 			</div>

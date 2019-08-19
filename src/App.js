@@ -15,6 +15,7 @@ function App() {
     <>
       <Route path={'/'} exact component={Login}/>
       <Route path={'/login'} component={Login}/>
+
       <Route path={'/index'} render={() => (
         <Index>
           <Switch>

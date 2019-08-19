@@ -1,16 +1,16 @@
 import { observable, action } from 'mobx';
 
-import {querySiderMenu} from '../services/api'
+// import {querySiderMenu} from '../services/api'
 
 class UiStore {
 
 	@observable
 	siderMenu = undefined
 
-	@action
-	async loadSiderMenu() {
-		this.siderMenu = await querySiderMenu();
-	}
+	// @action
+	// async loadSiderMenu() {
+	// 	this.siderMenu = await querySiderMenu();
+	// }
 }
 
 export default new UiStore();

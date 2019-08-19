@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Card, Table, Divider, Tag, Icon, Tooltip } from 'antd'
-import {getTime} from '../../../services/utils'
+import { inject, observer } from 'mobx-react'
+import { toJS } from 'mobx'
 
 const columns = [
 	{
@@ -25,11 +26,11 @@ const columns = [
 	},
 	{
 		title: '',
-		key: 'valid',
-		dataIndex: 'valid',
-		render: valid => (
+		key: 'status',
+		dataIndex: 'status',
+		render: status => (
 			<span>
-				{valid
+				{status === 1
 					? <Tag color={'green'}>有效</Tag>
 					: <Tag color={'red'}>停用</Tag>}
       </span>
@@ -52,62 +53,30 @@ const columns = [
 	},
 ]
 
-const data = [
-	{
-		key: '1',
-		userName: 'admin',
-		role: 'SuperAdmin',
-		time: getTime(true),
-		remark: '超管啥都能干',
-		valid: true
-	},
-	{
-		key: '2',
-		userName: '录入员01',
-		role: 'DataEntryStaff',
-		time: getTime(true),
-		remark: '录入档案信息',
-		valid: false
-	},
-	{
-		key: '3',
-		userName: '录入员02',
-		role: 'DataEntryStaff',
-		time: getTime(true),
-		remark: '录入档案信息',
-		valid: true
-	},
-	{
-		key: '4',
-		userName: '普通用户01',
-		role: 'user',
-		time: getTime(true),
-		remark: '只能看看,借资料',
-		valid: true
-	},
-	{
-		key: '5',
-		userName: '普通用户02',
-		role: 'user',
-		time: getTime(true),
-		remark: '只能看看,借资料',
-		valid: true
-	},
-]
-
+@inject('userStore')
+@observer
 class AuthUser extends Component {
 
+	componentWillMount() {
+		this.props.userStore.loadAllUsers()
+			.catch(e => {
+				console.log(e)
+			})
+	}
+
 	render() {
+		console.log(toJS(this.props.userStore.allUsers))
 		return (
 			<div className='table-with-filter-warp'>
 				<Card>
-					<Button type="primary" onClick={this.handleAddUser}><Icon type={'search'}/>搜索用户</Button>
+					<Button type="primary" onClick={() => {console.log('click')}}><Icon type={'search'}/>搜索用户</Button>
 				</Card>
 
 				<div className="table-warp">
 					<Table
+						size={'middle'}
 						columns={columns}
-						dataSource={data}
+						dataSource={this.props.userStore.allUsers}
 					/>
 				</div>
 			</div>

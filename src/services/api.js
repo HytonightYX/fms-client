@@ -1,6 +1,12 @@
 import axios from 'axios'
+import url from '../config'
 
-export async function querySiderMenu() {
-	const res = await axios.get('https://www.easy-mock.com/mock/5d341175763f0068c2361e65/api/query-menu')
+const ver = '/v1'
+
+export async function queryAllUsers() {
+	const res = await axios.get(
+		// url + ver + '/user'
+		'http://localhost:3035/v1/user'
+	)
 	return res.data
 }
