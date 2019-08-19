@@ -1,6 +1,9 @@
 import { observable, action } from 'mobx';
-import { queryAllUsers } from '../services/api'
-import axios from 'axios'
+import {
+	queryAllUsers,
+	queryDelUserById
+} from '../services/api'
+import { failureMsg, successMsg } from '../services/utils'
 
 class UserStore {
 
@@ -42,6 +45,23 @@ class UserStore {
 	async loadAllUsers() {
 		this.allUsers = await queryAllUsers();
 		console.log('get all users')
+	}
+
+	@action
+	async delUserById(id) {
+		const r = await queryDelUserById(id)
+		if (r.errorCode === 0) {
+			successMsg('删除成功', 0.7)
+
+			// 刷新allUser(表格)
+			this.loadAllUsers()
+				.catch(e => {
+					console.log(e)
+				})
+
+		} else {
+			failureMsg(r)
+		}
 	}
 }
 

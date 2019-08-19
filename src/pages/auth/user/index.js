@@ -39,19 +39,30 @@ const columns = [
 	{
 		title: '操作',
 		key: 'action',
-		render: () => (
-			<span>
+		render: (record) => (
+			<Actions record={record}/>
+		),
+	},
+]
+
+const Actions = inject('userStore')(observer((props) => {
+	return (
+		<span>
 				<Tooltip title="修改">
           <a><Icon type="edit"/></a>
         </Tooltip>
 				<Divider type="vertical"/>
 				<Tooltip title="删除">
-          <a><Icon type="delete"/></a>
+          <a onClick={() => {
+          	props.userStore.delUserById(props.record.id)
+		          .catch(e => {
+		          	console.log(e)
+		          })
+          }}><Icon type="delete" /></a>
         </Tooltip>
       </span>
-		),
-	},
-]
+	)
+}))
 
 @inject('userStore')
 @observer
