@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Layout } from 'antd'
-import { querySiderMenu } from '../services/api'
 import FmsHeader from '../components/Header'
 import SiderLeft from '../components/SiderLeft'
 import FmsFooter from '../components/Footer'
@@ -16,16 +15,6 @@ class Index extends Component {
 	state = {
 		collapsed: false,
 		menu: system_menu
-	}
-
-	componentWillMount() {
-		querySiderMenu()
-			.then(res => {
-				this.setState({menu: system_menu})
-			})
-			.catch(e => {
-				console.log(e)
-			})
 	}
 
 	toggle = () => {

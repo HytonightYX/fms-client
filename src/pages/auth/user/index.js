@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Card, Table, Divider, Tag, Icon, Tooltip } from 'antd'
 import { inject, observer } from 'mobx-react'
 import { toJS } from 'mobx'
+import Actions from './components/Actions'
 
 const columns = [
 	{
@@ -45,30 +46,11 @@ const columns = [
 	},
 ]
 
-const Actions = inject('userStore')(observer((props) => {
-	return (
-		<span>
-				<Tooltip title="修改">
-          <a><Icon type="edit"/></a>
-        </Tooltip>
-				<Divider type="vertical"/>
-				<Tooltip title="删除">
-          <a onClick={() => {
-          	props.userStore.delUserById(props.record.id)
-		          .catch(e => {
-		          	console.log(e)
-		          })
-          }}><Icon type="delete" /></a>
-        </Tooltip>
-      </span>
-	)
-}))
-
 @inject('userStore')
 @observer
 class AuthUser extends Component {
 
-	componentWillMount() {
+	componentDidMount() {
 		this.props.userStore.loadAllUsers()
 			.catch(e => {
 				console.log(e)
@@ -80,7 +62,12 @@ class AuthUser extends Component {
 		return (
 			<div className='table-with-filter-warp'>
 				<Card>
-					<Button type="primary" onClick={() => {console.log('click')}}><Icon type={'search'}/>搜索用户</Button>
+					<Button
+						type="primary"
+						onClick={() => {console.log('click')}}
+					>
+						<Icon type={'plus'}/>新建
+					</Button>
 				</Card>
 
 				<div className="table-warp">

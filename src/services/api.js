@@ -1,18 +1,32 @@
 import axios from 'axios'
 import config from '../config/index'
-const {url} = config
+const url_v1 = config.url + '/v1'
 
 export async function queryAllUsers() {
-	const res = await axios.get(
+	const r = await axios.get(
 		// url + ver + '/user'
-		url + '/v1/user'
+		url_v1 + '/user'
 	)
-	return res.data
+	return r.data
 }
 
 export async function queryDelUserById(id) {
 	const r = await axios.delete(
-		url + '/v1/user/' + id,
+		url_v1 + '/user/' + id,
+	)
+	return r.data
+}
+
+export async function queryActivateUser(id) {
+	const r = await axios.patch(
+		`${url_v1}/user/${id}/activate`
+	)
+	return r.data
+}
+
+export async function queryDeactivateUser(id) {
+	const r = await axios.patch(
+		`${url_v1}/user/${id}/deactivate`
 	)
 	return r.data
 }

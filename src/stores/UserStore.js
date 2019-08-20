@@ -1,7 +1,9 @@
 import { observable, action } from 'mobx';
 import {
 	queryAllUsers,
-	queryDelUserById
+	queryDelUserById,
+	queryActivateUser,
+	queryDeactivateUser
 } from '../services/api'
 import { failureMsg, successMsg } from '../services/utils'
 
@@ -50,8 +52,25 @@ class UserStore {
 	@action
 	async delUserById(id) {
 		const r = await queryDelUserById(id)
+		this.procRes(r)
+	}
+
+	@action
+	async activate(id) {
+		const r = await queryActivateUser(id)
+		this.procRes(r)
+	}
+
+	@action
+	async deactivate(id) {
+		const r = await queryDeactivateUser(id)
+		this.procRes(r)
+	}
+
+	procRes = (r) => {
+		console.log(r)
 		if (r.errorCode === 0) {
-			successMsg('删除成功', 0.7)
+			successMsg(r.message, 0.7)
 
 			// 刷新allUser(表格)
 			this.loadAllUsers()
