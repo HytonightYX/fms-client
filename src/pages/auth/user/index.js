@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Button, Card, Table, Divider, Tag, Icon, Tooltip } from 'antd'
+import { Button, Card, Table, Tag, Icon } from 'antd'
 import { inject, observer } from 'mobx-react'
-import { toJS } from 'mobx'
 import Actions from './components/Actions'
+import EditModal from './components/EditModal'
 
 const columns = [
 	{
@@ -50,6 +50,29 @@ const columns = [
 @observer
 class AuthUser extends Component {
 
+	state = {
+		showEditModal: false
+	}
+
+	submitEditUser = () => {
+		this.editUserForm.props.form.validateFields((err, values) => {
+			if (!err) {
+				const userData = console.log(values)
+
+				this.props.userStore.register(values)
+					.catch(e => {
+						console.log(e)
+					})
+
+				this.setState({showEditModal: false})
+			}
+		});
+	}
+
+	loadForm = (form) => {
+		this.editUserForm = form
+	}
+
 	componentDidMount() {
 		this.props.userStore.loadAllUsers()
 			.catch(e => {
@@ -58,13 +81,12 @@ class AuthUser extends Component {
 	}
 
 	render() {
-		console.log(toJS(this.props.userStore.allUsers))
 		return (
 			<div className='table-with-filter-warp'>
 				<Card>
 					<Button
 						type="primary"
-						onClick={() => {console.log('click')}}
+						onClick={() => {this.setState({showEditModal: true})}}
 					>
 						<Icon type={'plus'}/>新建
 					</Button>
@@ -77,6 +99,14 @@ class AuthUser extends Component {
 						dataSource={this.props.userStore.allUsers}
 					/>
 				</div>
+				<EditModal
+					visible={this.state.showEditModal}
+					onCancel={() => {
+						this.setState({showEditModal: false})
+					}}
+					submitEditUser={this.submitEditUser}
+					loadForm={this.loadForm}
+				/>
 			</div>
 		)
 	}
