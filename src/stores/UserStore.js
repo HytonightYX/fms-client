@@ -3,7 +3,8 @@ import {
 	queryAllUsers,
 	queryDelUserById,
 	queryActivateUser,
-	queryDeactivateUser
+	queryDeactivateUser,
+	queryRegisterUser
 } from '../services/api'
 import { failureMsg, successMsg } from '../services/utils'
 
@@ -67,9 +68,16 @@ class UserStore {
 		this.procRes(r)
 	}
 
+	@action
+	async register(user) {
+		const r = await queryRegisterUser(user)
+
+		this.procRes(r)
+	}
+
 	procRes = (r) => {
-		console.log(r)
-		if (r.errorCode === 0) {
+		console.log('procRes', r)
+		if (r && r.errorCode === 0) {
 			successMsg(r.message, 0.7)
 
 			// 刷新allUser(表格)
@@ -77,7 +85,6 @@ class UserStore {
 				.catch(e => {
 					console.log(e)
 				})
-
 		} else {
 			failureMsg(r)
 		}

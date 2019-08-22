@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Card, Table, Tag, Icon } from 'antd'
+import { Button, Card, Table, Tag, Icon, message } from 'antd'
 import { inject, observer } from 'mobx-react'
 import Actions from './components/Actions'
 import EditModal from './components/EditModal'
@@ -55,16 +55,13 @@ class AuthUser extends Component {
 	}
 
 	submitEditUser = () => {
-		this.editUserForm.props.form.validateFields((err, values) => {
+		this.editUserForm.props.form.validateFields(async (err, values) => {
 			if (!err) {
-				const userData = console.log(values)
-
 				this.props.userStore.register(values)
-					.catch(e => {
-						console.log(e)
+					.then(() => {
+						this.setState({showEditModal: false})
 					})
-
-				this.setState({showEditModal: false})
+					.catch(e => {})
 			}
 		});
 	}
