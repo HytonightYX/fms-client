@@ -1,7 +1,29 @@
 import axios from 'axios'
 import config from '../config/index'
-import { async } from 'q'
+import {message} from 'antd'
 const url_v1 = config.url + '/v1'
+
+/* =================== axios interceptors =================== */
+const axiosInstance = axios.create({
+	baseURL: url_v1
+})
+
+axiosInstance.interceptors.response.use(
+	response => successHandler(response),
+	error => errorHandler(error)
+)
+
+const successHandler = (response) => {
+	console.log('successHandler', response)
+	return response
+}
+
+const errorHandler = (error) => {
+	console.log('errorHandler', error)
+	message.error(error.response.data.message[0])
+	return Promise.reject({ ...error })
+}
+
 
 /* =================== users =================== */
 
@@ -34,8 +56,17 @@ export async function queryDeactivateUser(id) {
 	return r.data
 }
 
+// export async function queryRegisterUser(user) {
+// 	const r = await axios.post(
+// 		`${url_v1}/user/register`,
+// 		user
+// 	)
+// 	return r.data
+//
+// }
+
 export async function queryRegisterUser(user) {
-	const r = await axios.post(
+	const r = await axiosInstance.post(
 		`${url_v1}/user/register`,
 		user
 	)
