@@ -4,7 +4,8 @@ import {
 	queryDelUserById,
 	queryActivateUser,
 	queryDeactivateUser,
-	queryRegisterUser
+	queryRegisterUser,
+	queryUpdateUser
 } from '../services/api'
 import { failureMsg, successMsg } from '../services/utils'
 
@@ -29,14 +30,6 @@ class UserStore {
 	login(user) {
 		this.loadingUser = true;
 		this.currentUser = user
-	}
-
-	@action
-	updateUser(newUser) {
-		this.updatingUser = true;
-		// return agent.Auth.save(newUser)
-		// 	.then(action(({ user }) => { this.currentUser = user; }))
-		// 	.finally(action(() => { this.updatingUser = false; }))
 	}
 
 	@action
@@ -72,6 +65,12 @@ class UserStore {
 	async register(user) {
 		const r = await queryRegisterUser(user)
 
+		this.procRes(r)
+	}
+
+	@action
+	async updateUser(user) {
+		const r = await queryUpdateUser(user)
 		this.procRes(r)
 	}
 
