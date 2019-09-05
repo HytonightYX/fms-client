@@ -15,12 +15,15 @@ axiosInstance.interceptors.response.use(
 
 const successHandler = (response) => {
 	console.log('successHandler', response)
+	const msg = response.data.message
+	message.success(Array.isArray(msg) ? msg[0] : msg, 0.7)
 	return response
 }
 
 const errorHandler = (error) => {
 	console.log('errorHandler', error)
-	message.error(error.response.data.message[0])
+	const msg = error.response.data.message
+	message.error(Array.isArray(msg) ? msg[0] : msg, 0.7)
 	return Promise.reject({ ...error })
 }
 
@@ -56,6 +59,13 @@ export async function queryDeactivateUser(id) {
 	return r.data
 }
 
+export async function queryUpdateUser(user) {
+	const r = await axios.patch(
+		`${url_v1}/user/${user.id}/update`
+	)
+	return r.data
+}
+
 // export async function queryRegisterUser(user) {
 // 	const r = await axios.post(
 // 		`${url_v1}/user/register`,
@@ -77,6 +87,23 @@ export async function queryRegisterUser(user) {
 export async function queryAllRoles() {
 	const r = await axios.get(
 		url_v1 + '/role'
+	)
+	return r.data
+}
+
+
+/* =================== single files =================== */
+export async function queryAllSingleFiles() {
+	const r = await axios.get(
+		url_v1 + '/file/single',
+	)
+	return r.data
+}
+
+export async function queryLendAll(ids, lender) {
+	const r = await axiosInstance.post(
+		url_v1 + '/file/single/lend',
+		{ids, lender}
 	)
 	return r.data
 }
