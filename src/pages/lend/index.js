@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Card, Button, Table, Tag, Popover, Icon } from 'antd'
 import FilterForm from '../../components/Form/FilterForm'
 import { inject, observer } from 'mobx-react'
-import {toJS} from 'mobx'
+import { toJS } from 'mobx'
+import { formatTime } from '../../services/utils'
 
 @inject('lendStore', 'userStore')
 @observer
@@ -14,6 +15,11 @@ class Lend extends Component {
 		showAddFile: false,
 		showDrawer: true,
 		showSearch: false
+	}
+
+	onSelectChange = selectedRowKeys => {
+		console.log('selectedRowKeys changed: ', selectedRowKeys)
+		this.setState({selectedRowKeys})
 	}
 
 	componentDidMount() {
@@ -39,27 +45,40 @@ class Lend extends Component {
 
 		return (
 			<div className='table-with-filter-warp'>
-				{
-					this.state.showSearch ?
-						<Card className='card-filter'>
-							<FilterForm/>
-						</Card>
-						:
-						null
-				}
 
 				<div className="table-warp">
 					<Card className='table-op-card'>
-						<Button type={'primary'} onClick={() => {this.setState({showSearch: !this.state.showSearch})}}>查询</Button>
-						<Button >归还</Button>
-						<Button onClick={() => {this.lendIt(this.state.selectedRowKeys)}}>借阅</Button>
+						<Button type={'primary'} onClick={() => {
+							this.setState({showSearch: !this.state.showSearch})
+						}}>查询</Button>
+						<Button onClick={() => {
+							this.props.lendStore.returnSelected(
+								this.state.selectedRowKeys
+							).then(() => {
+								this.props.lendStore.loadAllLendsByUserId(1)
+									.catch(e => console.log(e))
+							})
+								.catch(e => {
+								console.log(e)
+							})
+						}}>归还</Button>
+
+						{
+							this.state.showSearch ?
+								<Card className='card-filter'>
+									<FilterForm/>
+								</Card>
+								:
+								null
+						}
+
 					</Card>
 
 					<Table
 						size={'middle'}
 						columns={my_lend_columns}
 						dataSource={this.props.lendStore.userLends}
-						rowKey={r => r.id}
+						rowKey={r => r.fileId}
 						rowSelection={rowSelection}
 					/>
 				</div>
@@ -100,6 +119,9 @@ const my_lend_columns = [
 		title: '借阅日期',
 		dataIndex: 'updatedAt',
 		key: 'updatedAt',
+		render(time) {
+			return formatTime(time)
+		}
 	},
 	{
 		title: '操作',
