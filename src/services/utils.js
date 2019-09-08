@@ -36,6 +36,13 @@ export function getTime(onlyDate = false, isNow = true) {
 	}
 }
 
+export function formatTime(unFormatTime) {
+	console.log(unFormatTime)
+	return unFormatTime
+		.replace('T', ' ')
+		.replace('.000Z', '')
+}
+
 /**
  * 失败时弹窗
  * @param response api call的返回值
