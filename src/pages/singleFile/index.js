@@ -28,17 +28,6 @@ class SingleFile extends Component {
 			.catch(e => console.log(e))
 	}
 
-	start = () => {
-		this.setState({loading: true})
-		setTimeout(() => {
-			this.setState({
-				selectedRowKeys: [],
-				selectedRowIds: [],
-				loading: false,
-			})
-		}, 1000)
-	}
-
 	onSelectChange = selectedRowKeys => {
 		console.log('selectedRowKeys changed: ', selectedRowKeys)
 		this.setState({selectedRowKeys})
@@ -125,13 +114,13 @@ class SingleFile extends Component {
 					</Card>
 
 					<Table
-						size={'middle'}
+						size={'small'}
 						scroll={{x: 2350, y: 1000}}
 						columns={single_file_columns}
 						dataSource={this.props.singleFileStore.allSingleFiles}
 						rowKey={r => r.id}
 						rowSelection={rowSelection}
-						// pagination={{ pageSize: 25 }}
+						pagination={{ pageSize: 12 }}
 					/>
 				</div>
 
@@ -190,7 +179,7 @@ const single_file_columns = [
 		title: '文件字号',
 		dataIndex: 'fileCode',
 		key: 'fileCode',
-		width: 100,
+		width: 140,
 	},
 	{
 		title: '责任者',
