@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Layout } from 'antd'
+import { inject, observer } from 'mobx-react'
+import { Layout, Modal } from 'antd'
+import {system_menu} from '../config/menu.config'
+import { Redirect } from 'react-router-dom'
 import FmsHeader from '../components/Header'
 import SiderLeft from '../components/SiderLeft'
 import FmsFooter from '../components/Footer'
-import {system_menu} from '../config/menu.config'
 import './style.less'
-import { inject, observer } from 'mobx-react'
-
 const {Content} = Layout
 
 @inject('userStore')
@@ -14,7 +14,8 @@ const {Content} = Layout
 class Index extends Component {
 	state = {
 		collapsed: false,
-		menu: system_menu
+		menu: system_menu,
+		showPwdModal: false
 	}
 
 	toggle = () => {
@@ -28,9 +29,20 @@ class Index extends Component {
 		this.setState({
 			collapsed: !this.state.collapsed,
 		})
-	};
+	}
+
+	togglePwdModal = () => {
+		this.setState({
+			showPwdModal: !this.state.showPwdModal
+		})
+	}
+
 
 	render() {
+		if (!this.props.userStore.currentUser) {
+			return <Redirect to={'/login'} />
+		}
+
 		return (
 			<Layout>
 
@@ -45,6 +57,8 @@ class Index extends Component {
 
 					<FmsHeader
 						currentUser={this.props.userStore.currentUser}
+						togglePwdModal={this.togglePwdModal}
+						showPwdModal={this.state.showPwdModal}
 					/>
 
 					<Content className='index-content'>
@@ -54,6 +68,10 @@ class Index extends Component {
 					<FmsFooter>
 						版权所有: XXXXXXXXXXXXXXXX
 					</FmsFooter>
+
+					<Modal>
+
+					</Modal>
 
 				</Layout>
 
