@@ -5,7 +5,8 @@ import {
 	queryActivateUser,
 	queryDeactivateUser,
 	queryRegisterUser,
-	queryUpdateUser
+	queryUpdateUser,
+	queryLogin
 } from '../services/api'
 import { failureMsg, successMsg } from '../services/utils'
 
@@ -27,9 +28,10 @@ class UserStore {
 	allUsers = undefined
 
 	@action
-	login(user) {
-		this.loadingUser = true;
-		this.currentUser = user
+	async login(user) {
+		const res = await queryLogin(user.userName, user.password)
+		console.log(res)
+		this.currentUser = res
 	}
 
 	@action

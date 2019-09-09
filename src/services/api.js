@@ -29,6 +29,13 @@ const errorHandler = (error) => {
 
 
 /* =================== users =================== */
+export async function queryLogin(userName, password) {
+	const r = await axiosInstance.post(
+		url_v1 + '/user/login',
+		{userName, password}
+	)
+	return r.data.user
+}
 
 export async function queryAllUsers() {
 	const r = await axios.get(
@@ -105,5 +112,23 @@ export async function queryLendAll(ids, lender) {
 		url_v1 + '/file/single/lend',
 		{ids, lender}
 	)
+	return r.data
+}
+
+/* =================== lend file =================== */
+export async function queryAllLendsByUserId(uid) {
+	const r = await axios.get(
+		url_v1 + '/lend/' + uid,
+	)
+	return r.data
+}
+
+
+export async function queryReturnSelected(ids) {
+	const r = await axiosInstance.post(
+		url_v1 + '/lend/return',
+		ids
+	)
+
 	return r.data
 }
