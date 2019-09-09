@@ -6,7 +6,7 @@ const system_menu = [
 	},
 	{
 		title: '档案借阅',
-		key: '/index/borrow',
+		key: '/index/lend',
 		icon: 'dashboard'
 	},
 	{
