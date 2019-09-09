@@ -36,6 +36,8 @@ const OrganizationTreeDrawer = (props) => (
 		placement={props.placement}
 		onClose={props.onClose}
 		visible={props.visible}
+		width={200}
+		mask={false}
 	>
 		<OrganizationTree/>
 	</Drawer>

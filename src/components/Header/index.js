@@ -33,7 +33,7 @@ class FmsHeader extends React.Component {
 		return (
 			<Header className='header'>
 				<span className='header-title'>
-					文件档案管理
+					{/*文件档案管理*/}
 				</span>
 
 				<span className='user'>

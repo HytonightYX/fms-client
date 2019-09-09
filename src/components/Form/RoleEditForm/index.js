@@ -1,13 +1,11 @@
-// 角色编辑表单
 import React from 'react'
-import { Form, Input, Select, Tree } from 'antd/lib/index'
-
+import { Form, Input, Select, Tree } from 'antd'
 import { system_menu } from '../../../config/menu.config'
 
 const {TreeNode} = Tree
 const {Option} = Select
 
-class Index extends React.Component {
+class RoleEditForm extends React.Component {
 	onCheck = (checkedKeys) => {
 		this.props.pushCheckedPerms(checkedKeys)
 	}
@@ -68,4 +66,4 @@ class Index extends React.Component {
 	}
 }
 
-export default Index = Form.create({})(Index)
+export default Form.create({})(RoleEditForm)
