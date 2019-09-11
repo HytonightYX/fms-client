@@ -51,7 +51,8 @@ const columns = [
 class AuthUser extends Component {
 
 	state = {
-		showEditModal: false
+		showEditModal: false,
+		userInfo: null
 	}
 
 	submitEditUser = () => {
@@ -103,6 +104,7 @@ class AuthUser extends Component {
 					}}
 					submitEditUser={this.submitEditUser}
 					loadForm={this.loadForm}
+					userInfo={this.state.userInfo}
 				/>
 			</div>
 		)

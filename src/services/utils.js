@@ -36,8 +36,12 @@ export function getTime(onlyDate = false, isNow = true) {
 	}
 }
 
+/**
+ * 格式化时间
+ * @param unFormatTime
+ * @returns {*}
+ */
 export function formatTime(unFormatTime) {
-	console.log(unFormatTime)
 	return unFormatTime
 		.replace('T', ' ')
 		.replace('.000Z', '')

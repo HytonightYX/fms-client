@@ -90,8 +90,8 @@ class Lend extends Component {
 const my_lend_columns = [
 	{
 		title: '文件题名',
-		dataIndex: 'fileId',
-		key: 'fileId',
+		dataIndex: 'title',
+		key: 'title',
 		// render(arr) {
 		// 	return arr.map((item) => {
 		// 		return item.name
@@ -117,8 +117,8 @@ const my_lend_columns = [
 	},
 	{
 		title: '借阅日期',
-		dataIndex: 'updatedAt',
-		key: 'updatedAt',
+		dataIndex: 'createdAt',
+		key: 'createdAt',
 		render(time) {
 			return formatTime(time)
 		}

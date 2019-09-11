@@ -8,11 +8,14 @@ import * as serviceWorker from './serviceWorker';
 import {loadConfigAsGlobal} from './services/utils'
 import config from './config'
 import stores from './stores'
+import ErrorMsg from './components/ErrorMsg'
 
 ReactDOM.render(
 	<Provider {...stores}>
 		<HashRouter>
-			<App />
+			<ErrorMsg>
+				<App />
+			</ErrorMsg>
 		</HashRouter>
 	</Provider>
 	, document.getElementById('root'));

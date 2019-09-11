@@ -6,7 +6,13 @@ const Actions = inject('userStore')(observer((props) => {
 	return (
 		<span>
 			<Tooltip title="修改">
-        <a><Icon type="edit"/></a>
+        <a onClick={() => {
+	        props.userStore.deactivate(props.record.id)
+		        .catch(e => {
+			        console.log(e)
+		        })
+	        console.log('修改')
+        }}><Icon type="edit"/></a>
       </Tooltip>
 
 			<Divider type="vertical"/>

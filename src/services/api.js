@@ -14,14 +14,12 @@ axiosInstance.interceptors.response.use(
 )
 
 const successHandler = (response) => {
-	console.log('successHandler', response)
 	const msg = response.data.message
-	message.success(Array.isArray(msg) ? msg[0] : msg, 0.7)
+	msg && message.success(Array.isArray(msg) ? msg[0] : msg, 0.7)
 	return response
 }
 
 const errorHandler = (error) => {
-	console.log('errorHandler', error)
 	const msg = error.response.data.message
 	message.error(Array.isArray(msg) ? msg[0] : msg, 0.7)
 	return Promise.reject({ ...error })
@@ -98,6 +96,12 @@ export async function queryAllRoles() {
 	return r.data
 }
 
+export async function queryDividedUser(rid) {
+	const r = await axiosInstance.get(
+		`${url_v1}/role/${rid}`
+	)
+	return r.data
+}
 
 /* =================== single files =================== */
 export async function queryAllSingleFiles() {
